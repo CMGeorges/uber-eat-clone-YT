@@ -5,11 +5,11 @@ export default function HeaderTabs() {
     return (
         <View>
         {/* Header Button 1 */}
-        <HeaderButton />
+        <HeaderButton name='Delivery' />
         {/* Header Button 2 */}
-            
+        <HeaderButton name='Pick Up' />
         </View>
     )
 }
 
-const HeaderButton = ()=> {return (<Text>Delivery</Text>)}
+const HeaderButton = (props)=> {return (<Text>{props.name}</Text>)}
