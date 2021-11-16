@@ -1,9 +1,9 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text,TouchableOpacity } from 'react-native'
 
 export default function HeaderTabs() {
     return (
-        <View>
+        <View style={{flexDirection:"row",alignSelf:"center"}}>
         {/* Header Button 1 */}
         <HeaderButton name='Delivery' />
         {/* Header Button 2 */}
@@ -12,4 +12,11 @@ export default function HeaderTabs() {
     )
 }
 
-const HeaderButton = (props)=> {return (<Text>{props.name}</Text>)}
+const HeaderButton = (props)=> {
+    return (
+    <View>
+        <TouchableOpacity>
+        <Text>{props.name}</Text>
+        </TouchableOpacity>
+    </View>)
+    };
