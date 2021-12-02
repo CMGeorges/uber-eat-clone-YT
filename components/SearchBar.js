@@ -33,6 +33,12 @@ export default function SearchBar() {
           <View
             style={{
               flexDirection: "row",
+              marginRight: 8,
+              backgroundColor: "white",
+              padding: 9,
+              borderRadius: 30,
+              alignItems: "center",
+
             }}
           >
             <AntDesign name="clockcircle" size={11} />
