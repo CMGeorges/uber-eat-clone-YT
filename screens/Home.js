@@ -1,39 +1,36 @@
-import React, { useEffect } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { View, Text, SafeAreaView, ScrollView } from "react-native";
+import yelp from "../api/yelp";
 import Categories from "../components/Categories";
 import HeaderTabs from "../components/HeaderTabs";
 import RestaurantItems from "../components/RestaurantItems";
 import SearchBar from "../components/SearchBar";
 
 const YELP_API_KEY =
-  "2txX4O1-3rVaZpwI-zyASNxERFxFTFurip4NiwZWeFD1LyVhsskNfvCcjMWnMbTU-L7LmPQu6T-n7rWEwNeQD75YEymgU2d7l-jxF1Kf4h_TxLMSCnhseMvSQ6SrYXYx";
+  "Bearer 8NmU5vG06oQ1HcRokTCCz8d8SfkGtcSvq-FgBOHazx-0_8mah3e_z-cSv4GaxMbVC4eDl5CriCBfpRwSvTqF5nHytbFZpZ8ihfMrI3vefVkG0Pr7CPgZ82IKgNWzYXYx";
 
 export default function Home() {
-  const [restaurantData, setRestaurantData] = React.useState([]);
+  const [restaurantData, setRestaurantData] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
+  const [results, setResults] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const getRestaurantsFromYelp = () => {
-    const yelpUrl =
-      "https://api.yelp.com/v3/businesses/search?term=restaurants&location=Hollywood";
-
-    const apiOptions = {
-      //TODO: CORS Issues
-      //mode: "no-cors",
-      //Origin: ["http://localhost:19006/"],
-      headers: {
-        //"Access-Control-Allow-Origin": "*",
-        Authorization: `Bearer ${YELP_API_KEY}`,
-      },
-    };
-
-    return fetch(yelpUrl, apiOptions)
-      .then((res) => {
-        res.json();
-      })
-      .then((json) => {
-        setRestaurantData(json.businesses);
+  const getRestaurantsFromYelp = async () => {
+    try {
+      const response = await yelp.get("/search", {
+        params: {
+          limit: 50,
+          term: "restaurants",
+          location: "Hollywood",
+        },
       });
+      setRestaurantData(response.data.businesses);
+      setErrorMessage("");
+    } catch (err) {
+      setErrorMessage("No restaurants");
+    }
   };
-
   useEffect(() => {
     getRestaurantsFromYelp();
   }, []);
