@@ -7,8 +7,6 @@ import HeaderTabs from "../components/HeaderTabs";
 import RestaurantItems from "../components/RestaurantItems";
 import SearchBar from "../components/SearchBar";
 
-const YELP_API_KEY =
-  "Bearer 8NmU5vG06oQ1HcRokTCCz8d8SfkGtcSvq-FgBOHazx-0_8mah3e_z-cSv4GaxMbVC4eDl5CriCBfpRwSvTqF5nHytbFZpZ8ihfMrI3vefVkG0Pr7CPgZ82IKgNWzYXYx";
 
 export default function Home() {
   const [restaurantData, setRestaurantData] = useState([]);
@@ -22,7 +20,7 @@ export default function Home() {
         params: {
           limit: 50,
           term: "restaurants",
-          location: "Hollywood",
+          location: "montreal",
         },
       });
       setRestaurantData(response.data.businesses);
@@ -31,6 +29,8 @@ export default function Home() {
       setErrorMessage("No restaurants");
     }
   };
+
+
   useEffect(() => {
     getRestaurantsFromYelp();
   }, []);
