@@ -18,7 +18,7 @@ export default function RestaurantItems(props) {
   );
 }
 
-// ********************************Subcomponents***************************************************
+// ********************************Sub Components***************************************************
 
 const RestaurantImage = (props) => (
   <>
@@ -44,8 +44,8 @@ const RestaurantInfo = (props) => (
     }}
   >
     <View>
-      <Text style={{ frontSize: 15, fontWeight: "bold" }}>{props.name}</Text>
-      <Text style={{ frontSize: 13, color: "grey" }}>{props.rating}</Text>
+      <Text style={{ fontSize: 15, fontWeight: "bold" }}>{props.name}</Text>
+      <Text style={{ fontSize: 13, color: "grey" }}> 30-40 ⸱ min </Text>
     </View>
     <View
       style={{
