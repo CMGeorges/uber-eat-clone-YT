@@ -24,14 +24,19 @@ export default function Home() {
           },
         })
         .then((response) => {
-          console.log(response.data.businesses);//filter doesn't work....
-          setRestaurantData(response.data.businesses
-            );
-        }).then(json => {
-          console.log(json);
+          const restaurants = response.data.businesses;
+          const data = restaurants.filter((business) =>
+            business?.transactions?.includes(activeTab.toLowerCase())
+          );
+          console.log(data);
+          if (data.length != 0) {
+            setRestaurantData(data);
+          } else {
+            setRestaurantData(restaurants);
+          }
         });
-        
-        setErrorMessage("");
+
+      setErrorMessage("");
     } catch (err) {
       setErrorMessage("No restaurants");
       //console.log(err);
