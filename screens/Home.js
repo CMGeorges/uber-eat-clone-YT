@@ -4,11 +4,11 @@ import { View, Text,  ScrollView } from "react-native";
 import { Divider } from "react-native-elements";
 import { SafeAreaView } from "react-native-safe-area-context";
 import yelp from "../api/yelp";
-import BottomTabs from "../components/BottomTabs";
-import Categories from "../components/Categories";
-import HeaderTabs from "../components/HeaderTabs";
-import RestaurantItems from "../components/RestaurantItems";
-import SearchBar from "../components/SearchBar";
+import BottomTabs from "../components/home/BottomTabs";
+import Categories from "../components/home/Categories";
+import HeaderTabs from "../components/home/HeaderTabs";
+import RestaurantItems from "../components/home/RestaurantItems";
+import SearchBar from "../components/home/SearchBar";
 
 export default function Home() {
   const [restaurantData, setRestaurantData] = useState([]);
