@@ -1,7 +1,10 @@
-import axios from "axios";
+
 import React, { useEffect, useState } from "react";
-import { View, Text, SafeAreaView, ScrollView } from "react-native";
+import { View, Text,  ScrollView } from "react-native";
+import { Divider } from "react-native-elements";
+import { SafeAreaView } from "react-native-safe-area-context";
 import yelp from "../api/yelp";
+import BottomTabs from "../components/BottomTabs";
 import Categories from "../components/Categories";
 import HeaderTabs from "../components/HeaderTabs";
 import RestaurantItems from "../components/RestaurantItems";
@@ -28,7 +31,6 @@ export default function Home() {
           const data = restaurants.filter((business) =>
             business?.transactions?.includes(activeTab.toLowerCase())
           );
-          console.log(data);
           if (data.length != 0) {
             setRestaurantData(data);
           } else {
@@ -57,6 +59,8 @@ export default function Home() {
         <Categories />
         <RestaurantItems restaurantData={restaurantData} />
       </ScrollView>
+      <Divider width={1} />
+      <BottomTabs />
     </SafeAreaView>
   );
 }
