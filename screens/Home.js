@@ -10,7 +10,7 @@ import HeaderTabs from "../components/home/HeaderTabs";
 import RestaurantItems from "../components/home/RestaurantItems";
 import SearchBar from "../components/home/SearchBar";
 
-export default function Home() {
+export default function Home({navigation}) {
   const [restaurantData, setRestaurantData] = useState([]);
   const [searchInput, setSearchInput] = useState("Montreal");
   const [activeTab, setActiveTab] = useState("Delivery");
@@ -57,7 +57,7 @@ export default function Home() {
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Categories />
-        <RestaurantItems restaurantData={restaurantData} />
+        <RestaurantItems restaurantData={restaurantData} navigation={navigation} />
       </ScrollView>
       <Divider width={1} />
       <BottomTabs />

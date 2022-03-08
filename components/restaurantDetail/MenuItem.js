@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Text, View, Image, StyleSheet, ScrollView } from "react-native";
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { Divider } from "react-native-elements";
 import yelp from "../../api/yelp";
 
@@ -15,7 +16,6 @@ const styles = StyleSheet.create({
   },
 });
 
-
 const MenuItem = () => {
   const [foods, setFoods] = useState();
 
@@ -24,10 +24,15 @@ const MenuItem = () => {
       {foods.map((food, index) => (
         <View key={index}>
           <View style={styles.menuItemStyle}>
+            <BouncyCheckbox iconStyle={{ borderColor: "lightgray", borderRadius: 5}} fillColor="green" />
             <FoodInfo food={food} />
             <FoodImage food={food} />
           </View>
-          <Divider width={0.5} orientation="vertical" />
+          <Divider
+            width={0.5}
+            orientation="vertical"
+            style={{ marginHorizontal: 20 }}
+          />
         </View>
       ))}
     </ScrollView>

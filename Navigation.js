@@ -1,0 +1,24 @@
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import React from "react";
+import Home from "./screens/Home";
+import RestaurantDetailScreen from "./screens/RestaurantDetailScreen";
+
+const RootNavigation = () => {
+  const Stack = createStackNavigator();
+
+  const screenOptions = {
+    headerShown: false,
+  };
+
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home" screenOptions={screenOptions}>
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="RestaurantDetail" component={RestaurantDetailScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+export default RootNavigation;
