@@ -35,7 +35,7 @@ const RestaurantTitle = (props) => (
     }}
   >
     {" "}
-    {props.title}
+    {props.name}
   </Text>
 );
 
