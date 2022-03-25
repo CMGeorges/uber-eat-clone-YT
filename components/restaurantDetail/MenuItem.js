@@ -17,8 +17,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const MenuItem = ({ restaurant }) => {
-  const [foods, setFoods] = useState();
+const MenuItem = ({ props }) => {
+  const [foods, setFoods] = useState([]);
 
   const dispatch = useDispatch();
   const selectItem = (item, checkboxValue) =>
@@ -26,7 +26,7 @@ const MenuItem = ({ restaurant }) => {
       type: "ADD_ITEM",
       payload: {
         ...item,
-        restaurantName: restaurant.name,
+        restaurantName: props.restaurant.name,
         checkboxValue: checkboxValue,
       },
     });

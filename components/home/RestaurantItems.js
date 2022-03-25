@@ -13,11 +13,12 @@ export default function RestaurantItems({ navigation, ...props }) {
           onPress={() =>
             navigation.navigate("RestaurantDetail", {
               name: restaurant.name,
-              image: restaurant.image,
+              image: restaurant.image_url,
               price: restaurant.price,
               reviews: restaurant.reviews,
               rating: restaurant.rating,
               categories: restaurant.categories,
+              menu: restaurant,
             })
           }
         >

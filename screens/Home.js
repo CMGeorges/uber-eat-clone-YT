@@ -28,6 +28,8 @@ export default function Home({navigation}) {
         })
         .then((response) => {
           const restaurants = response.data.businesses;
+          console.log(restaurants[0]);
+          
           const data = restaurants.filter((business) =>
             business?.transactions?.includes(activeTab.toLowerCase())
           );

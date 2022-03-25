@@ -1,21 +1,21 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
 
-export default function About(props) {
-  const { name, image, price, reviews, rating, categories } = props.route.params;
+export default function About({...props}) {
+  //const { name, image, price, reviews, rating, categories } = props.route.params;
 
-  const formattedCategories = categories.map((cat) => cat.title).join(" ⸱ ");
   
-  const description = `${formattedCategories} ${
-    price ? " ⸱ " + price : ""
-  } ⸱ 🎫  ⸱  ${rating} ☪ (${reviews}+)`;
+  
+  const description = `${props.categories} ${
+    props.price ? " ⸱ " + props.price : ""
+  } ⸱ 🎫  ⸱  ${props.rating} ☪ ${ props.reviews ? '('+props.reviews+')' : ''}`;
   
   
   
   return (
     <View>
-      <RestaurantImage image={image} />
-      <RestaurantTitle title={name} />
+      <RestaurantImage image={props.image} />
+      <RestaurantTitle name={props.name} />
       <RestaurantDescription description={description} />
     </View>
   );
