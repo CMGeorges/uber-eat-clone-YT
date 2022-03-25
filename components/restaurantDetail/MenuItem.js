@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Text, View, Image, StyleSheet, ScrollView } from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { Divider } from "react-native-elements";
+import { useDispatch, useSelector } from "react-redux";
 import yelp from "../../api/yelp";
 
 const styles = StyleSheet.create({
@@ -16,15 +17,40 @@ const styles = StyleSheet.create({
   },
 });
 
-const MenuItem = () => {
+const MenuItem = ({ restaurant }) => {
   const [foods, setFoods] = useState();
+
+  const dispatch = useDispatch();
+  const selectItem = (item, checkboxValue) =>
+    dispatch({
+      type: "ADD_ITEM",
+      payload: {
+        ...item,
+        restaurantName: restaurant.name,
+        checkboxValue: checkboxValue,
+      },
+    });
+
+  /// the useSelector hook is used to get the state from the store
+  const cartItems = useSelector(
+    (state) => state.cartReducer.selectedItems.items
+  );
+
+  ///If the restaurant is already in the cart, then the checkbox should be checked
+  const isFoodInCart = (food, cartItems) =>
+    Boolean(cartItems.find((item) => item.title === food.title));
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       {foods.map((food, index) => (
         <View key={index}>
           <View style={styles.menuItemStyle}>
-            <BouncyCheckbox iconStyle={{ borderColor: "lightgray", borderRadius: 5}} fillColor="green" />
+            <BouncyCheckbox
+              iconStyle={{ borderColor: "lightgray", borderRadius: 5 }}
+              fillColor="green"
+              onPress={(checkboxValue) => selectItem(food, checkboxValue)}
+              isChecked={isFoodInCart(food, cartItems)}
+            />
             <FoodInfo food={food} />
             <FoodImage food={food} />
           </View>
