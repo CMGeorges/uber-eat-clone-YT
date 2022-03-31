@@ -4,6 +4,7 @@ import { View, Text,  ScrollView } from "react-native";
 import { Divider } from "react-native-elements";
 import { SafeAreaView } from "react-native-safe-area-context";
 import yelp from "../api/yelp";
+import uberEat from "../api/uberEat";
 import BottomTabs from "../components/home/BottomTabs";
 import Categories from "../components/home/Categories";
 import HeaderTabs from "../components/home/HeaderTabs";
@@ -28,7 +29,36 @@ export default function Home({navigation}) {
         })
         .then((response) => {
           const restaurants = response.data.businesses;
-          console.log(restaurants[0]);
+          
+          const data = restaurants.filter((business) =>
+            business?.transactions?.includes(activeTab.toLowerCase())
+          );
+          if (data.length != 0) {
+            setRestaurantData(data);
+          } else {
+            setRestaurantData(restaurants);
+          }
+        });
+
+      setErrorMessage("");
+    } catch (err) {
+      setErrorMessage("No restaurants");
+      //console.log(err);
+    }
+  };
+  //ne fonctionne pas
+  const getRestaurantsFromUberEat = async () => {
+    try {
+      return await uberEat
+        .get("/stores", {
+          params: {
+            limit: 50,
+            //location: searchInput,
+          },
+        })
+        .then((response) => {
+          const restaurants = response.data.stores;
+          console.log(restaurants);
           
           const data = restaurants.filter((business) =>
             business?.transactions?.includes(activeTab.toLowerCase())
@@ -49,6 +79,7 @@ export default function Home({navigation}) {
 
   useEffect(() => {
     getRestaurantsFromYelp();
+    //getRestaurantsFromUberEat();
   }, [searchInput, activeTab]);
 
   return (
